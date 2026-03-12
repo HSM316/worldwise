@@ -2,7 +2,6 @@ import Spinner from "./Spinner";
 import Message from "./Message";
 import styles from "./CountryList.module.css";
 import CountryItem from "./CountryItem";
-import PropTypes from "prop-types";
 import { useCities } from "../contexts/CitiesContext";
 
 function CountryList() {
@@ -26,10 +25,5 @@ function CountryList() {
     </ul>
   );
 }
-
-CountryList.propTypes = {
-  cities: PropTypes.array,
-  isLoading: PropTypes.bool,
-};
 
 export default CountryList;

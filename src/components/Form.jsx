@@ -12,6 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useCities } from "../contexts/CitiesContext";
 import { useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
     .toUpperCase()
@@ -34,34 +35,31 @@ function Form() {
   const { createCity, isLoading } = useCities();
   const navigate = useNavigate();
 
+  async function fetchCityData() {
+    try {
+      setIsLoadingGeocoding(true);
+      setGeocodingError("");
+      const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
+      const data = await res.json();
+
+      if (!data.countryCode) throw new Error("That doesn't seem to be a city");
+
+      setCityName(data.city || data.locality || "");
+      setCountry(data.countryName);
+      setEmoji(convertToEmoji(data.countryCode));
+    } catch (err) {
+      setGeocodingError(err.message);
+    } finally {
+      setIsLoadingGeocoding(false);
+    }
+  }
+
   useEffect(
     function () {
       if (!lat && !lng) return;
-
-      async function fetchCityData() {
-        try {
-          setIsLoadingGeocoding(true);
-          setGeocodingError("");
-          const res = await fetch(
-            `${BASE_URL}?latitude=${lat}&longitude=${lng}`
-          );
-          const data = await res.json();
-
-          if (!data.countryCode)
-            throw new Error("That doesn't seem to be a city");
-
-          setCityName(data.city || data.locality || "");
-          setCountry(data.countryName);
-          setEmoji(convertToEmoji(data.countryCode));
-        } catch (err) {
-          setGeocodingError(err.message);
-        } finally {
-          setIsLoadingGeocoding(false);
-        }
-      }
       fetchCityData();
     },
-    [lat, lng]
+    [lat, lng],
   );
 
   async function handleSubmit(e) {

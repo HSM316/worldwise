@@ -6,8 +6,6 @@ import {
   useCallback,
 } from "react";
 
-import PropTypes from "prop-types";
-
 const BASE_URL = "http://localhost:9000";
 
 const CitiesContext = createContext();
@@ -72,7 +70,7 @@ function reducer(state, action) {
 function CitiesProvider({ children }) {
   const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
     reducer,
-    initialState
+    initialState,
   );
 
   useEffect(function () {
@@ -107,7 +105,7 @@ function CitiesProvider({ children }) {
         });
       }
     },
-    [currentCity.id]
+    [currentCity.id],
   );
 
   async function createCity(newCity) {

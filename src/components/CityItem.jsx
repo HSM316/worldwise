@@ -1,5 +1,4 @@
 import styles from "./CityItem.module.css";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useCities } from "../contexts/CitiesContext";
 
@@ -11,7 +10,7 @@ const formatDate = (date) =>
     weekday: "long",
   }).format(new Date(date));
 
-function CityItem({ city, key }) {
+function CityItem({ city }) {
   const { currentCity, deleteCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
 
@@ -21,7 +20,7 @@ function CityItem({ city, key }) {
   }
 
   return (
-    <li key={key}>
+    <li>
       <Link
         className={`${styles.cityItem} ${
           id === currentCity.id ? styles["cityItem--active"] : ""
@@ -38,10 +37,5 @@ function CityItem({ city, key }) {
     </li>
   );
 }
-
-CityItem.propTypes = {
-  city: PropTypes.array,
-  key: PropTypes.number,
-};
 
 export default CityItem;
