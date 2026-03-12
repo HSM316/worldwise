@@ -2,7 +2,7 @@
 import styles from "./Product.module.css";
 import PageNav from "../components/PageNav";
 
-export default function Product() {
+export default function Pricing() {
   return (
     <main className={styles.product}>
       <PageNav />
@@ -14,9 +14,7 @@ export default function Product() {
             Just $9/month.
           </h2>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae vel
-            labore mollitia iusto. Recusandae quos provident, laboriosam fugit
-            voluptatem iste.
+            Unlock unlimited travel tracking with WorldWise Premium. Document every city you visit, add detailed notes and photos, and access your complete travel history anytime. No hidden fees, cancel anytime. Start your journey today and never forget a moment of your adventures.
           </p>
         </div>
         <img src="img-2.jpg" alt="overview of a large city with skyscrapers" />
